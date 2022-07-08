@@ -25,8 +25,19 @@ public class Main {
         double medicalCredit = sc.nextDouble();
 
 
-        Individual i = new Individual(salary,bonus, interestReceived, dividends, capitalGains,
+        Individual taxPayer = new Individual(salary,bonus, interestReceived, dividends,
+            capitalGains,
             retirementFunding, travelAllowance, medicalCredit);
-        System.out.println(i.getNettTaxableIncome());
+
+        System.out.println(taxPayer.getTaxableIncome());
+        System.out.println(taxPayer.getTaxableExpenses());
+        Calculator taxCalculator = new Calculator(taxPayer);
+        double netTaxPayable = taxCalculator.calculateTax();
+
+        System.out.println("------------------------------------------");
+        System.out.println("Nett Tax Payable (Annual) - R"+Math.round(netTaxPayable*100.0)/100.0);
+        System.out.println("Nett Tax Payable (Monthly) - R"+Math.round((netTaxPayable/12)*100.0)/100.0);
+        System.out.println("Average Tax Rate - "+Math.round((netTaxPayable/taxPayer.getNettTaxableIncome()*100)*100.0)/100.0+"%");
+        System.out.println("------------------------------------------");
     }
 }

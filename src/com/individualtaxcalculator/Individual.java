@@ -48,11 +48,12 @@ public class Individual {
   }
 
   private double getTaxableRetirementFunding(){
-    double max = salary*rates[indexR];
-    if(retirementFunding<max) {
+    double max = (getTaxableSalary()+getTaxableBonus())*rates[indexR];
+    if(retirementFunding<max&&max<350000) {
       return retirementFunding;
     }else{
-      return max;
+      if(max<350000){return max;}
+      else{return 350000;}
     }
   }
 
@@ -60,7 +61,7 @@ public class Individual {
     return (travelAllowance-exemptions[indexT])*rates[indexT];
   }
 
-  private double getMedicalCredit(){
+  public double getMedicalCredit(){
     return medicalCredit;
   }
 
