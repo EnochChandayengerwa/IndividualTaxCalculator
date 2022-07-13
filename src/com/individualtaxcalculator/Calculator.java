@@ -2,15 +2,9 @@ package com.individualtaxcalculator;
 
 public class Calculator {
 
-  private Individual taxPayer;
-  private double medicalCredit = 12000;
-  private double primaryRebate = 15714.00;
+  private final Individual taxPayer;
 
-  private double[] exemptions = new double[]{0,0,23800,0,40000,0,0};
-  private double[] rates = new double[]{1,1,1,0,0.4,0.275,1};
-  private int indexS = 0, indexB = 1, indexI = 2, indexD = 3, indexC = 4, indexR = 5, indexT = 6;
-
-  private double[][] taxTable = new double[][]{
+  private final double[][] taxTable = new double[][]{
       {0,216200,0.18},
       {216201,337800,0.26},
       {337801,467500, 0.31},
@@ -25,53 +19,38 @@ public class Calculator {
 //    this.nettTaxableIncome = taxPayer.getNettTaxableIncome();
   }
 
-  private double getTaxableSalary(){
-    return (taxPayer.getSalary()-exemptions[indexS])*rates[indexS];
-  }
-
-  private double getTaxableBonus(){
-    return (taxPayer.getBonus()-exemptions[indexB])*rates[indexB];
-  }
-
-  private double getTaxableInterestReceived(){
-    return (taxPayer.getInterestReceived()-exemptions[indexI])*rates[indexI] ;
-  }
-
-  private double getTaxableDividends(){
-    return (taxPayer.getDividends()-exemptions[indexD])*rates[indexD];
-  }
-
-  private double getTaxableCapitalGains(){
-    return (taxPayer.getCapitalGains()-exemptions[indexC])*rates[indexC];
-  }
-
-  private double getTaxableRetirementFunding(){
-    double max = (getTaxableSalary()+getTaxableBonus())*rates[indexR];
-    if(taxPayer.getRetirementFunding()<max&&max<350000) {
-      return taxPayer.getRetirementFunding();
-    }else{
-      if(max<350000){return max;}
-      else{return 350000;}
-    }
-  }
-
-  private double getTaxableTravelAllowance(){
-    return (taxPayer.getTravelAllowance()-exemptions[indexT])*rates[indexT];
-  }
 
   public double getTaxableIncome(){
-    return getTaxableSalary()+getTaxableBonus()+getTaxableInterestReceived()+
-        getTaxableDividends()+getTaxableCapitalGains();
+    double Salary = taxPayer.getSalary();
+    double bonus = taxPayer.getBonus();
+    double taxableInterestReceived = taxPayer.getInterestReceived() - 23800.00;
+    double TotalCapitalGainsExempted = taxPayer.getCapitalGains() - 40000.00;
+    double taxableTotalCapitalGains = TotalCapitalGainsExempted * 0.4;
+    return Salary + bonus + taxableInterestReceived + taxableTotalCapitalGains;
   }
-
   public double getTaxableExpenses(){
-    return getTaxableRetirementFunding()+getTaxableTravelAllowance();
+    double RetirementFunding = taxPayer.getRetirementFunding();
+    double Salary = taxPayer.getSalary();
+    double bonus = taxPayer.getBonus();
+    double maxTaxableRetirementFunding = (Salary+bonus) * 0.275;
+    if (RetirementFunding < maxTaxableRetirementFunding && maxTaxableRetirementFunding<350000){
+      RetirementFunding = RetirementFunding;
+    }
+    else{
+      if (maxTaxableRetirementFunding < 350000) {
+        RetirementFunding=maxTaxableRetirementFunding;
+      }
+      else{
+        RetirementFunding=350000;
+      }
+    }
+    double TravellingExpenses = taxPayer.getTravelAllowance();
+    return RetirementFunding + TravellingExpenses;
   }
 
   public double getNettTaxableIncome(){
     return getTaxableIncome()-getTaxableExpenses();
   }
-
 
   public double taxPayable(){
     double taxPayable= 0;
@@ -93,7 +72,15 @@ public class Calculator {
     return taxPayable;
   }
 
-  public double calculateTax(){
-    return taxPayable()-primaryRebate-medicalCredit;
+  public void calculateTax(){
+    double medicalCredit = 12000;
+    double primaryRebate = 15714.00;
+    double taxPayableAnnually = taxPayable()- primaryRebate - medicalCredit;
+    System.out.println("------------------------------------------");
+    System.out.println("Nett Tax Payable (Annual) - R"+Math.round(taxPayableAnnually*100.0)/100.0);
+    System.out.println("Nett Tax Payable (Monthly) - R"+Math.round((taxPayableAnnually/12)*100.0)/100.0);
+    System.out.println("Average Tax Rate - "+Math.round((taxPayableAnnually/getNettTaxableIncome()*100)*100.0)/100.0+"%");
+    System.out.println("------------------------------------------");
+
   }
 }
