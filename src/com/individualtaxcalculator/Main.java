@@ -27,8 +27,8 @@ public class Main {
 
 //        System.out.println(taxPayer.getTaxableIncome());
 //        System.out.println(taxPayer.getTaxableExpenses());
-        Calculator taxCalculator = new Calculator(taxPayer);
-        taxCalculator.calculateTax();
+       // Calculator taxCalculator = new Calculator(taxPayer);
+        Calculator.calculateTax(taxPayer);
 
 
     }
