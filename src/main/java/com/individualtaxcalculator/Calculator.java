@@ -2,9 +2,12 @@ package com.individualtaxcalculator;
 
 public class Calculator {
 
-//  private final Individual taxPayer;
   private static final double INTEREST_RECEIVED_EXEMPTION = 23800.00;
-
+  private static final double CAPITAL_GAINS_EXEMPTION = 40000.00;
+  private static final double CAPITAL_GAINS_RATE = 0.4;
+  private static final double RETIREMENT_FUNDING_RATE = 0.275;
+  private static final double RETIREMENT_FUNDING_MAX = 350000.00;
+  private static final double PRIMARY_REBATE = 15714.00;
 
   private static final double[][] taxTable = new double[][]{
       {0,216200,0.18},
@@ -15,37 +18,31 @@ public class Calculator {
       {782200,1656600,0.41},
       {1656600,1000000000,0.45}};
 
- // public Calculator(Individual taxPayer){
- //   this.taxPayer = taxPayer;
-//    this.medicalCredit = taxPayer.getMedicalCredit();
-//    this.nettTaxableIncome = taxPayer.getNettTaxableIncome();
- // }
-
-
   public static double getTaxableIncome(Individual taxPayer){
     double Salary = taxPayer.getSalary();
     double bonus = taxPayer.getBonus();
     double taxableInterestReceived = taxPayer.getInterestReceived() - INTEREST_RECEIVED_EXEMPTION;
     taxableInterestReceived = taxableInterestReceived <0?0: taxableInterestReceived;
-    double taxableCapitalGains = taxPayer.getCapitalGains() - 40000.00;
+    double taxableCapitalGains = taxPayer.getCapitalGains() - CAPITAL_GAINS_EXEMPTION;
     taxableCapitalGains = taxableCapitalGains <0?0: taxableCapitalGains;
-    double taxableTotalCapitalGains = taxableCapitalGains * 0.4;
+    double taxableTotalCapitalGains = taxableCapitalGains * CAPITAL_GAINS_RATE;
     return Salary + bonus + taxableInterestReceived + taxableTotalCapitalGains;
   }
+
   public static double getTaxableExpenses(Individual taxPayer){
     double RetirementFunding = taxPayer.getRetirementFunding();
     double Salary = taxPayer.getSalary();
     double bonus = taxPayer.getBonus();
-    double maxTaxableRetirementFunding = (Salary+bonus) * 0.275;
-    if (RetirementFunding < maxTaxableRetirementFunding && maxTaxableRetirementFunding<350000){
+    double maxTaxableRetirementFunding = (Salary+bonus) * RETIREMENT_FUNDING_RATE;
+    if (RetirementFunding < maxTaxableRetirementFunding && maxTaxableRetirementFunding<RETIREMENT_FUNDING_MAX){
       RetirementFunding = RetirementFunding;
     }
     else{
-      if (maxTaxableRetirementFunding < 350000) {
+      if (maxTaxableRetirementFunding < RETIREMENT_FUNDING_MAX) {
         RetirementFunding=maxTaxableRetirementFunding;
       }
       else{
-        RetirementFunding=350000;
+        RetirementFunding=RETIREMENT_FUNDING_MAX;
       }
     }
     double TravellingExpenses = taxPayer.getTravelAllowance();
@@ -76,15 +73,10 @@ public class Calculator {
     return taxPayable;
   }
 
-  public static void calculateTax(Individual taxPayer){
-    double medicalCredit = 12000;
-    double primaryRebate = 15714.00;
-    double taxPayableAnnually = taxPayable(taxPayer)- primaryRebate - medicalCredit;
-    System.out.println("------------------------------------------");
-    System.out.println("Nett Tax Payable (Annual) - R"+Math.round(taxPayableAnnually*100.0)/100.0);
-    System.out.println("Nett Tax Payable (Monthly) - R"+Math.round((taxPayableAnnually/12)*100.0)/100.0);
-    System.out.println("Average Tax Rate - "+Math.round((taxPayableAnnually/getNettTaxableIncome(taxPayer)*100)*100.0)/100.0+"%");
-    System.out.println("------------------------------------------");
+  public static double calculateTax(Individual taxPayer){
+    double medicalCredit = taxPayer.getMedicalCredit();
+    double taxPayableAnnually = taxPayable(taxPayer)- PRIMARY_REBATE - medicalCredit;
+    return taxPayableAnnually;
 
   }
 }
