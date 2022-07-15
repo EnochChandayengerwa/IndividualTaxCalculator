@@ -1,4 +1,4 @@
-package java.com.individualtaxcalculator;
+package com.individualtaxcalculator;
 
 import com.individualtaxcalculator.Individual;
 import junit.framework.TestCase;

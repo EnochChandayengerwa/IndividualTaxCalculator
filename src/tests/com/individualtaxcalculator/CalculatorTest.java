@@ -1,4 +1,4 @@
-package java.com.individualtaxcalculator;
+package com.individualtaxcalculator;
 
 import com.individualtaxcalculator.Calculator;
 import com.individualtaxcalculator.Individual;
@@ -6,7 +6,6 @@ import junit.framework.TestCase;
 
 public class CalculatorTest extends TestCase {
   Individual taxPayer;
-  double primaryRebate = 15714.0;
 
   public void setUp() throws Exception {
     super.setUp();
@@ -36,6 +35,6 @@ public class CalculatorTest extends TestCase {
 
   public void testCalculateTax() {
     double tax = Calculator.calculateTax(taxPayer);
-    assertEquals(tax,168736.68);
+    assertEquals(tax,168736.92);
   }
 }
