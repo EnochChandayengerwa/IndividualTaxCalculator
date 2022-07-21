@@ -42,79 +42,40 @@ public class TaxPayer {
     return bonus;
   }
 
-  public void setBonus(double bonus) {
-    this.bonus = bonus;
-  }
-
   public double getInterestReceived() {
     return interestReceived;
-  }
-
-  public void setInterestReceived(double interestReceived) {
-    this.interestReceived = interestReceived;
   }
 
   public double getDividends() {
     return dividends;
   }
 
-  public void setDividends(double dividends) {
-    this.dividends = dividends;
-  }
-
   public double getCapitalGains() {
     return capitalGains;
-  }
-
-  public void setCapitalGains(double capitalGains) {
-    this.capitalGains = capitalGains;
   }
 
   public double getRetirementFunding() {
     return retirementFunding;
   }
 
-  public void setRetirementFunding(double retirementFunding) {
-    this.retirementFunding = retirementFunding;
-  }
-
   public double getTravelAllowance() {
     return travelAllowance;
-  }
-
-  public void setTravelAllowance(double travelAllowance) {
-    this.travelAllowance = travelAllowance;
   }
 
   public double getMedicalCredit() {
     return medicalCredit;
   }
 
-  public void setMedicalCredit(double medicalCredit) {
-    this.medicalCredit = medicalCredit;
-  }
-
   public String getFullName() {
     return fullName;
-  }
-
-  public void setFullName(String fullName) {
-    this.fullName = fullName;
   }
 
   public String getDateOfBirth() {
     return dateOfBirth;
   }
 
-  public void setDateOfBirth(String dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
-  }
-
   public int getTaxReferenceNum() {
     return taxReferenceNum;
   }
 
-  public void setTaxReferenceNum(int taxReferenceNum) {
-    this.taxReferenceNum = taxReferenceNum;
-  }
 }
