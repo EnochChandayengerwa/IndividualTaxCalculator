@@ -4,7 +4,8 @@ public class TaxPayer {
 
 //  Personal Variables
   private String fullName;
-  private int id, taxReferenceNum;
+  private int taxReferenceNum;
+  private String dateOfBirth;
 
 //  Financial Variables
   private double salary, bonus, interestReceived, dividends,
@@ -12,12 +13,12 @@ public class TaxPayer {
       medicalCredit;
 
 //  Constructor (initialise variables)
-  public TaxPayer(String fullName, int id, int taxReferenceNum, double salary, double bonus,
+  public TaxPayer(String fullName, String dateOfBirth, int taxReferenceNum, double salary, double bonus,
                   double interestReceived, double dividends,
                   double capitalGains, double retirementFunding, double travelAllowance,
                   double medicalCredit) {
     this.fullName = fullName;
-    this.id = id;
+    this.dateOfBirth = dateOfBirth;
     this.taxReferenceNum = taxReferenceNum;
     this.salary = salary;
     this.bonus = bonus;
@@ -101,12 +102,12 @@ public class TaxPayer {
     this.fullName = fullName;
   }
 
-  public int getId() {
-    return id;
+  public String getDateOfBirth() {
+    return dateOfBirth;
   }
 
-  public void setId(int id) {
-    this.id = id;
+  public void setDateOfBirth(String dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
   }
 
   public int getTaxReferenceNum() {

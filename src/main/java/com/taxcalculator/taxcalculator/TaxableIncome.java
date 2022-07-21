@@ -3,8 +3,9 @@ package com.taxcalculator.taxcalculator;
 import com.taxcalculator.taxpayer.TaxPayer;
 
 public class TaxableIncome {
+  private static int year = 2022;
 
-//  Calculate taxable income
+  //  Calculate taxable income
   public static double calculateTaxableIncome(TaxPayer taxPayer) {
     double salary = getTaxableSalary(taxPayer);
     double bonus = getTaxableBonus(taxPayer);
@@ -26,16 +27,19 @@ public class TaxableIncome {
 
 //  Get taxable interest received
   public static double getTaxableInterestReceived(TaxPayer taxPayer){
-    double interestReceived = taxPayer.getInterestReceived() - TaxExemptions.getInterestReceivedExemption();
+    double interestReceived =
+        taxPayer.getInterestReceived() - TaxExemptions.getInterestReceivedExemption(year);
     interestReceived = interestReceived <0?0: interestReceived;
     return interestReceived;
   }
 
 //  Get taxable capital gains
   public static double getTaxableCapitalGains(TaxPayer taxPayer){
-    double taxableCapitalGains = taxPayer.getCapitalGains() - TaxExemptions.getCapitalGainsExemption();
-    taxableCapitalGains = taxableCapitalGains <TaxExemptions.getCapitalGainsExemption()?0: taxableCapitalGains;
-    double totalCapitalGains = taxableCapitalGains * TaxRates.getCapitalGainsRate();
+    double taxableCapitalGains =
+        taxPayer.getCapitalGains() - TaxExemptions.getCapitalGainsExemption(year);
+    taxableCapitalGains = taxableCapitalGains <TaxExemptions.getCapitalGainsExemption(year)?0:
+        taxableCapitalGains;
+    double totalCapitalGains = taxableCapitalGains * TaxRates.getCapitalGainsRate(year);
 
     return totalCapitalGains;
   }

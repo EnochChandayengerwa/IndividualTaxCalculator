@@ -12,10 +12,10 @@ public class TaxPayerInput {
   }
 
 //  Get ID
-  public static int getID() {
+  public static String getDateOfBirth() {
     Scanner sc= new Scanner(System.in);
-    System.out.print("Enter your ID - ");
-    return sc.nextInt();
+    System.out.print("Enter your date of birth (dd/mm/yyyy)- ");
+    return sc.nextLine();
   }
 
 //  Get tax reference number
@@ -80,5 +80,4 @@ public class TaxPayerInput {
     System.out.print("Enter medical credit - R");
     return sc.nextDouble();
   }
-
 }

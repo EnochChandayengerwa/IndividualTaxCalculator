@@ -2,16 +2,10 @@ package com.taxcalculator.taxcalculator;
 
 public class TaxTables {
 
-  private static final double[][] taxTable = new double[][]{
-      {0,216200,0.18},
-      {216201,337800,0.26},
-      {337801,467500, 0.31},
-      {467501,613600,0.36},
-      {613601,782200,0.39},
-      {782201,1656600,0.41},
-      {1656601,1000000000,0.45}};
+  private static int year = 2022;
 
   public static double calculateNetTax(double nettTaxableIncome) {
+    double[][] taxTable = TaxCalculatorDatabaseManager.getTaxTables(year);
     double taxPayable= 0;
     int i = 0;
 

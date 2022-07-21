@@ -3,6 +3,7 @@ package com.taxcalculator.taxcalculator;
 import com.taxcalculator.taxpayer.TaxPayer;
 
 public class TaxableExpenses {
+  private static int year = 2022;
 
 //  Get taxable expenses
   public static double calculateTaxableExpenses(TaxPayer taxPayer) {
@@ -14,16 +15,16 @@ public class TaxableExpenses {
     double RetirementFunding = taxPayer.getRetirementFunding();
     double salary = taxPayer.getSalary();
     double bonus = taxPayer.getBonus();
-    double maxTaxableRetirementFunding = (salary+bonus) * TaxRates.getRetirementFundingRate();
-    if (RetirementFunding < maxTaxableRetirementFunding && maxTaxableRetirementFunding<TaxRates.getRetirementFundingMax()){
+    double maxTaxableRetirementFunding = (salary+bonus) * TaxRates.getRetirementFundingRate(year);
+    if (RetirementFunding < maxTaxableRetirementFunding && maxTaxableRetirementFunding<TaxRates.getRetirementFundingMax(year)){
       RetirementFunding = RetirementFunding;
     }
     else{
-      if (maxTaxableRetirementFunding < TaxRates.getRetirementFundingMax()) {
+      if (maxTaxableRetirementFunding < TaxRates.getRetirementFundingMax(year)) {
         RetirementFunding=maxTaxableRetirementFunding;
       }
       else{
-        RetirementFunding=TaxRates.getRetirementFundingMax();
+        RetirementFunding=TaxRates.getRetirementFundingMax(year);
       }
     }
     return RetirementFunding;
