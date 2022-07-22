@@ -1,4 +1,4 @@
-package com.taxcalculator.taxpayer;
+package com.taxcalculator.domain;
 
 import com.taxcalculator.database.DatabaseManager;
 import com.taxcalculator.ui.TaxPayerInput;

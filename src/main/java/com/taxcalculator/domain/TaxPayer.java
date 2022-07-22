@@ -1,4 +1,4 @@
-package com.taxcalculator.taxpayer;
+package com.taxcalculator.domain;
 
 public class TaxPayer {
 

@@ -1,11 +1,10 @@
-package com.taxcalculator.taxcalculator;
+package com.taxcalculator.service;
 
 import com.taxcalculator.database.DatabaseManager;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 public class TaxCalculatorDatabaseManager {
   private static Connection connection = DatabaseManager.getConnection();

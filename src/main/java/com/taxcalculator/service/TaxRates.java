@@ -1,4 +1,4 @@
-package com.taxcalculator.taxcalculator;
+package com.taxcalculator.service;
 
 public class TaxRates {
 

@@ -1,6 +1,6 @@
-package com.taxcalculator.taxcalculator;
+package com.taxcalculator.service;
 
-import com.taxcalculator.taxpayer.TaxPayer;
+import com.taxcalculator.domain.TaxPayer;
 
 public class TaxableExpenses {
   private static int year = 2022;

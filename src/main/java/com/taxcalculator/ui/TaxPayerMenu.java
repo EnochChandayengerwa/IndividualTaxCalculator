@@ -1,10 +1,10 @@
 package com.taxcalculator.ui;
 
-import com.taxcalculator.taxcalculator.TaxCalculator;
-import com.taxcalculator.taxcalculator.TaxableExpenses;
-import com.taxcalculator.taxcalculator.TaxableIncome;
-import com.taxcalculator.taxpayer.TaxPayer;
-import com.taxcalculator.taxpayer.TaxPayerDatabaseManager;
+import com.taxcalculator.service.TaxCalculator;
+import com.taxcalculator.service.TaxableExpenses;
+import com.taxcalculator.service.TaxableIncome;
+import com.taxcalculator.domain.TaxPayer;
+import com.taxcalculator.domain.TaxPayerDatabaseManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
